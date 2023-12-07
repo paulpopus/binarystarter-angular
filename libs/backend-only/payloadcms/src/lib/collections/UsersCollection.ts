@@ -50,7 +50,7 @@ const collection: CollectionConfig = {
            <p style="margin-top: 10px;">Hi ${user.firstName} ${user.lastName}.</p>
            <p style="margin-top: 10px;">Please click the following link to verify that we have the right email for you ${url}</p>
          </div>
-        
+
         `;
 
         return ``;
@@ -59,11 +59,11 @@ const collection: CollectionConfig = {
     forgotPassword: {
       generateEmailHTML: ({ req, token, user }) => {
         const url = `${webAppUrl}/auth/reset/${token}`;
-        return ` 
+        return `
          <div style="font-family: Roboto, Helvetica, Arial, sans-serif">
            <p style="margin-top: 10px;">Hi,</p>
            <p style="margin-top: 10px;">You are receiving this because you (or someone else) have requested the reset of the password for your account.</p>
-           <p style="margin-top: 10px;">Please click on the following link, or paste this into your browser to complete the process: ${url}</p> 
+           <p style="margin-top: 10px;">Please click on the following link, or paste this into your browser to complete the process: ${url}</p>
            <p style="margin-top: 10px;">If you did not request this, please ignore this email and your password will remain unchanged.</p>
          </div>
         `;
@@ -165,8 +165,8 @@ const collection: CollectionConfig = {
       },
       access: {
         read: () => true,
-        update: fieldAccessAdminOnly,
-        create: fieldAccessAdminOnly,
+        /* update: fieldAccessAdminOnly, */
+        /* create: fieldAccessAdminOnly, */
       },
       options: [
         {

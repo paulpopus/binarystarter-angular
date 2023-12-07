@@ -44,12 +44,6 @@ const start = async () => {
 
     await payload.init({
       secret: process.env.payload_secret,
-      mongoURL: process.env.mongo_url,
-      mongoOptions: {
-        user: process.env.mongo_username,
-        pass: process.env.mongo_password,
-        dbName: process.env.mongo_db,
-      },
       express: app,
       email: {
         fromName: 'binarystarter-angular',

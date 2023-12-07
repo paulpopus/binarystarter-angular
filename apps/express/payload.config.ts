@@ -1,5 +1,9 @@
 import { buildConfig } from 'payload/config';
 import * as path from 'path';
+import { mongooseAdapter } from '@payloadcms/db-mongodb';
+import { slateEditor } from '@payloadcms/richtext-slate';
+import { webpackBundler } from '@payloadcms/bundler-webpack';
+
 import {
   CategoriesCollection,
   PagesCollection,
@@ -30,8 +34,18 @@ export default buildConfig({
     max: 500,
     trustProxy: true,
   },
+  editor: slateEditor({}),
+  db: mongooseAdapter({
+    url: process.env.mongo_url,
+    connectOptions: {
+      user: process.env.mongo_username,
+      pass: process.env.mongo_password,
+      dbName: process.env.mongo_db,
+    },
+  }),
   admin: {
     user: UsersCollection.slug,
+    bundler: webpackBundler(),
     buildPath: path.resolve('../../dist/payload'),
     meta: {
       titleSuffix: process.env.app_name || '',
@@ -42,12 +56,12 @@ export default buildConfig({
       logout: {
         Button: RedirectToFrontendLogoutButton,
       },
-      routes: [
-        {
+      views: {
+        RedirectToFrontendLogin: {
           Component: RedirectToFrontendLogin,
           path: '/login',
         },
-      ],
+      },
     },
     webpack: (config) => ({
       ...config,
